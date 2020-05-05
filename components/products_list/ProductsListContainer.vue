@@ -1,55 +1,59 @@
 <template>
   <div class="columns is-centered is-multiline" style="margin-top:0px; margin-bottom:0px">
-    <div class="card column is-one-quarter" v-for="product in products" :key="product.id">
+    <div class="card column is-one-quarter" v-for="product in computedProducts" :key="product.id">
       <VmProducts :product="product"></VmProducts>
     </div>
-    <div class="section" v-if="products.length === 0">
+    <div class="section" v-if="computedProducts.length === 0">
       <p>{{ noProductLabel }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import VmProducts from '../Products';
-import { getByTitle } from '@/assets/filters';
+import VmProducts from "../Products";
+import { getByTitle } from "@/assets/filters";
+
 
 export default {
-  name: 'productsList',
-  
+  name: "productsList",
+
   components: { VmProducts },
-  
-  data () {
+
+  data() {
     return {
-      id: '',
-      noProductLabel: 'No product found',
+      id: "",
+      noProductLabel: "No product found",
       productsFiltered: []
     };
   },
 
+  props: ['products'],
+
   computed: {
-    products () {
+    computedProducts() {
       if (this.$store.state.userInfo.hasSearched) {
         return this.getProductByTitle();
       } else {
-        return this.$store.state.products;
+        return this.products
       }
     }
   },
 
   methods: {
-    getProductByTitle () {
-      let listOfProducts = this.$store.state.products,
-          titleSearched = this.$store.state.userInfo.productTitleSearched;
-      
-      return this.productsFiltered = getByTitle(listOfProducts, titleSearched);
+    getProductByTitle() {
+      let listOfProducts = this.products,
+        titleSearched = this.$store.state.userInfo.productTitleSearched;
+      return (this.productsFiltered = getByTitle(
+        listOfProducts,
+        titleSearched
+      ));
     }
   }
-
 };
 </script>
 
 <style lang="scss" scoped>
-  .card {
-    margin: 10px;
-  }
+.card {
+  margin: 10px;
+}
 </style>
