@@ -84,8 +84,8 @@ export default {
       emailNotValidLabel: 'Valid email required',
       btnLoggedInLabel: 'Close',
       emailPlaceholder: 'Your email',
-      email: 'jack@supermail.com',
-      password: 'jack_password',
+      email: 'supernut@gmail.com',
+      password: 'supernut_password',
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
       isFormSuccess: false

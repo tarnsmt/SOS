@@ -11,17 +11,6 @@
 					</a>
 				</p>
 				<p class="control">
-					
-					<a  v-if="!isUserLoggedIn" class="button">
-						<span class="icon">
-							<i class="fa fa-user-o"></i>
-						</span>
-						<nuxt-link :to="{ name: 'admin-add' }" style="color:#333">
-						Admin
-						</nuxt-link>
-					</a>
-				</p>
-				<p class="control">
 					<a v-if="!isUserLoggedIn" class="button" @click="showLoginModal">
 						<span class="icon">
 							<i class="fa fa-user"></i>
@@ -36,6 +25,9 @@
 			Welcome {{ getUserName }}
 			</a>
 			<div class="navbar-dropdown is-boxed">
+				<nuxt-link class="navbar-item" :to="{ name: 'admin-add' }" v-show="isShow">
+					Admin
+				</nuxt-link>
 				<nuxt-link class="navbar-item" :to="{ name: 'user-profile' }">
 					{{ userprofileLabel }}
 				</nuxt-link>
@@ -62,11 +54,18 @@ export default {
 			logoutLabel: 'Log out',
 			loginLabel: 'Log in',
 			signupLabel: 'Sign up',
-			adminLabel: 'Admin'
+			adminLabel: 'Admin',
+
 		}
 	},
 
 	computed: {
+		isShow(){
+			console.log(this.$auth.$storage.getLocalStorage("role") )
+			if(this.$auth.$storage.getLocalStorage("role") == "admin")
+				return true
+			return false
+		},
 		isUserLoggedIn () {
 			return this.$store.getters.isUserLoggedIn;
 		},
