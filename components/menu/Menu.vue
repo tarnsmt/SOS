@@ -36,6 +36,9 @@
 			Welcome {{ getUserName }}
 			</a>
 			<div class="navbar-dropdown is-boxed">
+				<nuxt-link class="navbar-item" :to="{ name: 'user-profile' }">
+					{{ userprofileLabel }}
+				</nuxt-link>
 				<nuxt-link class="navbar-item" :to="{ name: 'user-wishlist' }">
 					{{ wishlistLabel }}
 				</nuxt-link>
@@ -55,6 +58,7 @@ export default {
 		return {
 			tarnlabel: 'Tarn',
 			wishlistLabel: 'Wishlist',
+			userprofileLabel: 'User Profile',
 			logoutLabel: 'Log out',
 			loginLabel: 'Log in',
 			signupLabel: 'Sign up',

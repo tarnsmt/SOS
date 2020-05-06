@@ -153,6 +153,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title.is-4 {
+    padding-top:20px;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.125;
+}
  .details {
     cursor: pointer;
     position: absolute;
