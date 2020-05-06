@@ -11,6 +11,17 @@
 					</a>
 				</p>
 				<p class="control">
+					
+					<a class="button">
+						<span class="icon">
+							<i class="fa fa-user-o"></i>
+						</span>
+						<nuxt-link :to="{ name: 'admin-add' }" style="color:#333">
+						Admin
+						</nuxt-link>
+					</a>
+				</p>
+				<p class="control">
 					<a v-if="!isUserLoggedIn" class="button" @click="showLoginModal">
 						<span class="icon">
 							<i class="fa fa-user"></i>
@@ -46,7 +57,8 @@ export default {
 			wishlistLabel: 'Wishlist',
 			logoutLabel: 'Log out',
 			loginLabel: 'Log in',
-			signupLabel: 'Sign up'
+			signupLabel: 'Sign up',
+			adminLabel: 'Admin'
 		}
 	},
 
