@@ -1,11 +1,10 @@
 <template>
   <div>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="z-index:200">
       <div class="navbar-brand">
         <nuxt-link :to="{ name: 'index' }" class="navbar-item">
           <h1 class="title is-3 is-flex-mobile"></h1>
         </nuxt-link>
-
         <a role="button" class="navbar-burger burger" @click="isMenuOpen = !isMenuOpen" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -16,7 +15,7 @@
       <div class="navbar-menu is-active">
         <div class="navbar-start">
           <div class="navbar-item field">
-            <VmSearch></VmSearch>
+            <VmSearch></VmSearch>  
           </div>
         </div>
         
@@ -54,12 +53,29 @@
         <VmMenu></VmMenu>
       </div>
     </nav>
+
+<!-------------------------------------- Category ---------------------------------->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-menu is-active">
+        <div class="navbar-start" style="width:100%">
+          <div class="navbar-item field" style="width:100%">
+            <VmCategory></VmCategory>  
+          </div>
+        </div>
+      </div>
+
+      <!-- For mobile and tablet -->
+      <div v-show="false" class="navbar-end">
+        <VmCategory></VmCategory>
+      </div>
+    </nav>
   </div>
 </template>
 
 <script>
   import VmMenu from '../menu/Menu';
   import VmSearch from '../search/Search';
+  import VmCategory from '../search/Category';
 
   export default {
     name: 'VmHeader',
@@ -71,13 +87,14 @@
         twitterTooltip: 'Follow us on Twitter',
         instagramTooltip: 'Follow us on Instagram',
         isCheckoutActive: false,
-        isMenuOpen: false
+        isMenuOpen: false,
       }
     },
 
     components: {
       VmSearch,
-      VmMenu
+      VmMenu,
+      VmCategory
     },
 
     computed: {
