@@ -91,7 +91,8 @@ export default {
             this.$auth.$storage.setLocalStorage('refresh_token', null)
             this.$auth.$storage.setLocalStorage('user_id', null)
             this.$auth.$storage.setLocalStorage('role', null)
-            this.$auth.$storage.setLocalStorage('cart',null)
+			this.$auth.$storage.setLocalStorage('cart',null)
+			window.location.reload(true)
 		},
 		showLoginModal () {
 			this.$store.commit('showLoginModal', true);

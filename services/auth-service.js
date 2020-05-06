@@ -28,8 +28,8 @@ class AuthService {
 
         logout(auth) {
             this.setToken(false)
-            auth.$stroage.setLocalStorage('token', null)
-            auth.$stroage.setLocalStorage('refresh_token', null)
+            auth.$storage.setLocalStorage('token', null)
+            auth.$storage.setLocalStorage('refresh_token', null)
             auth.$storage.setLocalStorage('user_id', null)
             auth.$storage.setLocalStorage('role', null)
         }

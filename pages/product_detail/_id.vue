@@ -127,6 +127,8 @@ export default {
     for (let i = 1; i <= 10; i++) {
       this.quantityArray.push(i);
     }
+    if (this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit("isUserLoggedIn", true);
   },
 
   computed: {
@@ -153,7 +155,6 @@ export default {
       } else {
         this.$store.commit("showLoginModal", true);
       }
-
     },
     removeFromCart(id) {
       let data = {
