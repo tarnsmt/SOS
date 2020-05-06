@@ -17,7 +17,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="product_id"
         min="1" step="any"
         placeholder="Product ID"
       >
@@ -40,6 +40,7 @@ export default {
 
 	data () {
     return {
+      product_id: "",
       pageTitle: 'Delete product from stock',
     }
   },

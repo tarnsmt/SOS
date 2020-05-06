@@ -1,7 +1,5 @@
 <template>
   <div class="section">
-
-
     <div class="columns is-centered is-multiline align-center">
     <form style="width:50%">
       <div class="tab">
@@ -17,7 +15,7 @@
       <input
         class="input"
         type="text"
-        v-model="value"
+        v-model="title"
         placeholder="Product title"
       >
       </p>
@@ -27,7 +25,7 @@
       <input
         class="input"
         type="text"
-        v-model="value"
+        v-model="desc"
         placeholder="Product description"
       >
       </p>
@@ -37,7 +35,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="price"
         min="1" step="any"
         placeholder="Price"
       >
@@ -48,7 +46,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="stock"
         min="1" step="any"
         placeholder="Stock"
       >
@@ -59,7 +57,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="category_id"
         min="1" step="any"
         placeholder="Product ID"
       >
@@ -82,6 +80,11 @@ export default {
 
 	data () {
     return {
+      title:"",
+      desc:"",
+      price:"",
+      stock:"",
+      category_id:"",
       pageTitle: 'Add products for customer',
       noProductLabel: 'No product to add'
     }

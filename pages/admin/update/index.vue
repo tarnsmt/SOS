@@ -12,12 +12,23 @@
       <center>
         <h3 class="title" style="padding:30px 0px">{{ pageTitle }}</h3>
       </center>
+      <label class="control">Product Id</label><br>
+      <p class="control">
+      <input
+        class="input"
+        type="number"
+        v-model="product_id"
+        min="1" step="any"
+        placeholder="Product Id"
+      >
+      </p>
+      <br>
       <label class="control">Product title</label><br>
       <p class="control">
       <input
         class="input"
         type="text"
-        v-model="value"
+        v-model="title"
         placeholder="Product title"
       >
       </p>
@@ -27,7 +38,7 @@
       <input
         class="input"
         type="text"
-        v-model="value"
+        v-model="desc"
         placeholder="Product description"
       >
       </p>
@@ -37,7 +48,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="price"
         min="1" step="any"
         placeholder="Price"
       >
@@ -48,7 +59,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="stock"
         min="1" step="any"
         placeholder="Stock"
       >
@@ -59,7 +70,7 @@
       <input
         class="input"
         type="number"
-        v-model="value"
+        v-model="category_id"
         min="1" step="any"
         placeholder="Product ID"
       >
@@ -82,6 +93,12 @@ export default {
 
 	data () {
     return {
+      product_id:"",
+      title:"",
+      desc:"",
+      price:"",
+      stock:"",
+      category_id:"",
       pageTitle: 'Update Product',
     }
   },

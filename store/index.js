@@ -49,6 +49,9 @@ export const getters = {
   quantity: state => {
     return state.products.quantity;
   },
+  products: state => {
+    return state.products
+  }
 
 }
 

@@ -12,7 +12,7 @@
 <script>
 import VmProducts from "../Products";
 import { getByTitle } from "@/assets/filters";
-
+import { productService} from '@/services/product-service'
 
 export default {
   name: "productsList",
@@ -23,7 +23,8 @@ export default {
     return {
       id: "",
       noProductLabel: "No product found",
-      productsFiltered: []
+      productsFiltered: [],
+      category_id: this.$route.query.category
     };
   },
 
@@ -33,7 +34,8 @@ export default {
     computedProducts() {
       if (this.$store.state.userInfo.hasSearched) {
         return this.getProductByTitle();
-      } else {
+      } 
+      else {
         return this.products
       }
     }

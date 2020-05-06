@@ -16,18 +16,32 @@ export default {
     VmProductsList,
     VmHero
   },
-  async asyncData({ $axios, store }) {
+  async asyncData({ $axios, route, store }) {
     productService.setup($axios);
-    let pageInfo = await productService.getAllProducts().then(response => {
-      for (let product of response.products) {
-        (product.isAddedToCart = false),
-          (product.isAddedBtn = false),
-          (product.isFavourite = false),
-          (product.quantity = 1);
-      }
-      return response
-    });
-    store.commit("setProducts", pageInfo.products);
+    var pageInfo = [];
+    if (route.query.category !== undefined) {
+      pageInfo = await productService.getProductsByCategoryId(route.query.category).then(response => {
+        for (let product of response.products) {
+          (product.isAddedToCart = false),
+            (product.isAddedBtn = false),
+            (product.isFavourite = false),
+            (product.quantity = 1);
+        }
+        return response;
+      });
+    } else {
+      pageInfo = await productService.getAllProducts().then(response => {
+        for (let product of response.products) {
+          (product.isAddedToCart = false),
+            (product.isAddedBtn = false),
+            (product.isFavourite = false),
+            (product.quantity = 1);
+        }
+        return response;
+      });
+    }
+    let existProduct = store.getters.products
+    store.commit("setProducts", existProduct.concat(pageInfo.products));
     return { products: pageInfo.products };
   }
 };
