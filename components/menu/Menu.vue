@@ -11,6 +11,17 @@
 					</a>
 				</p>
 				<p class="control">
+					
+					<a  v-if="!isUserLoggedIn" class="button">
+						<span class="icon">
+							<i class="fa fa-user-o"></i>
+						</span>
+						<nuxt-link :to="{ name: 'admin-add' }" style="color:#333">
+						Admin
+						</nuxt-link>
+					</a>
+				</p>
+				<p class="control">
 					<a v-if="!isUserLoggedIn" class="button" @click="showLoginModal">
 						<span class="icon">
 							<i class="fa fa-user"></i>
@@ -25,6 +36,9 @@
 			Welcome {{ getUserName }}
 			</a>
 			<div class="navbar-dropdown is-boxed">
+				<nuxt-link class="navbar-item" :to="{ name: 'user-profile' }">
+					{{ userprofileLabel }}
+				</nuxt-link>
 				<nuxt-link class="navbar-item" :to="{ name: 'user-wishlist' }">
 					{{ wishlistLabel }}
 				</nuxt-link>
@@ -44,9 +58,11 @@ export default {
 		return {
 			tarnlabel: 'Tarn',
 			wishlistLabel: 'Wishlist',
+			userprofileLabel: 'User Profile',
 			logoutLabel: 'Log out',
 			loginLabel: 'Log in',
-			signupLabel: 'Sign up'
+			signupLabel: 'Sign up',
+			adminLabel: 'Admin'
 		}
 	},
 
