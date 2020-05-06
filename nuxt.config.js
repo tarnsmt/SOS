@@ -95,7 +95,12 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.AUTH_URL,
+    // proxy: true
   },
+  // proxy: {
+  //   '/api/v1/add_transaction': { target: process.env.CART_URL, pathRewrite: {'^/api/v1/': ''}, changeOrigin: true },
+  //   '/api/v1/users': { target: process.env.CART_URL, pathRewrite: {'^/api/v1/': ''}, changeOrigin: true }
+  // },
 
   buildModules: [
     '@nuxtjs/dotenv'
@@ -103,8 +108,5 @@ module.exports = {
   dotenv: {
     /* module options */
   },
-
-  auth: {
-    
-  }
+  auth: {}
 }

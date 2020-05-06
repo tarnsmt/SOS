@@ -91,9 +91,6 @@ export default {
       isFormSuccess: false
     };
   },
-  mounted(){
-    authService.setup(this.$axios)
-  },
 
   computed: {
     isUserLoggedIn () {
@@ -119,6 +116,7 @@ export default {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
         this.isFormSuccess = true;
+        authService.setup(this.$axios)
         authService.login(this.$auth,{email: this.email, password: this.password}).then(
           response => {
             this.$store.commit('isUserLoggedIn',true)   

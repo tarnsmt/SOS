@@ -71,6 +71,12 @@ export default {
 			this.$store.commit('isUserSignedUp', false);
 			this.$store.commit('removeProductsFromFavourite');
 			this.$router.push({ name: 'index' });
+			this.$axios.setToken(false)
+            this.$auth.$storage.setLocalStorage('token', null)
+            this.$auth.$storage.setLocalStorage('refresh_token', null)
+            this.$auth.$storage.setLocalStorage('user_id', null)
+            this.$auth.$storage.setLocalStorage('role', null)
+            this.$auth.$storage.setLocalStorage('cart',null)
 		},
 		showLoginModal () {
 			this.$store.commit('showLoginModal', true);

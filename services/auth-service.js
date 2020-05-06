@@ -1,30 +1,35 @@
+import { cartService } from "./cart-service"
+
 class AuthService {
-    client
-    constructor() { }
+        client
+        constructor() { }
 
-    setup(axios) {
-        this.client = axios
-        this.client.setBaseURL(process.env.AUTH_URL)
-        this.client.setHeader('Content-Type', 'application/json')
-        this.client.setHeader('Accept', 'applciation/json')
-    }
+        setup(axios) {
+            this.client = axios
+            this.client.setBaseURL(process.env.AUTH_URL)
+            this.client.setHeader('Content-Type', 'application/json')
+            this.client.setHeader('Accept', 'applciation/json')
 
-    login(auth, data) {
-        return this.client.post('authenticate', data).then(
-            response => {
-                this.client.setToken(response.data.token, "Bearer")
-                auth.$storage.setLocalStorage('token', response.data.token)
-                auth.$storage.setLocalStorage('refresh_token', response.data.refresh_token)
-                return "success"
-            }
-        )
-    }
+        }
 
-    logout(auth) {
-        this.setToken(false)
-        auth.$stroage.setLocalStroage('token', null)
-        auth.$stroage.setLocalStroage('refresh_token', null) 
+        login(auth, data) {
+            return this.client.post('authenticate', data).then(
+                response => {
+                    this.client.setToken(response.data.token, "Bearer")
+                    auth.$storage.setLocalStorage('user_id', response.data.user_id)
+                    auth.$storage.setLocalStorage('role', response.data.role)
+                    auth.$storage.setLocalStorage('token', response.data.token)
+                    auth.$storage.setLocalStorage('refresh_token', response.data.refresh_token)
+                    cartService.setup(this.client)
+                    cartService.getCart(auth.$storage.getLocalStorage('user_id')).then(
+                        cart => {
+                            auth.$storage.setLocalStorage('cart',cart,true)
+                        }
+                    )
+                    return "success"
+                }
+            )
+        }
     }
-}
 
 export const authService = new AuthService()
