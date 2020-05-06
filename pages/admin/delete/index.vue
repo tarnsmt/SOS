@@ -38,7 +38,7 @@
 <script>
 import VmProductsList from "@/components/Products";
 import { getByTitle } from "@/assets/filters";
-import {productService} from '@/services/product-service'
+import { productService } from "@/services/product-service";
 
 export default {
   name: "admin-delete",
@@ -49,13 +49,20 @@ export default {
       pageTitle: "Delete product from stock"
     };
   },
+  mounted() {
+    if (this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit("isUserLoggedIn", true);
+  },
 
   components: { VmProductsList },
   methods: {
     deleteProduct() {
       productService.setup(this.$axios);
       productService
-        .deleteProduct(this.$auth.$storage.getLocalStorage("user_id"), this.product_id) 
+        .deleteProduct(
+          this.$auth.$storage.getLocalStorage("user_id"),
+          this.product_id
+        )
         .then(response => {
           alert("delete Success");
         });

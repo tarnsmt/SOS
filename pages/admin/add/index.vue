@@ -77,6 +77,10 @@ export default {
       noProductLabel: "No product to add"
     };
   },
+  mounted(){
+    if(this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit('isUserLoggedIn',true)
+  },
   methods:{
     addProduct(){
       let payload = {
@@ -88,6 +92,7 @@ export default {
           category_id: this.category_id
         },
       }
+      console.log(this.$auth.$storage.getLocalStorage("role"))
       productService.setup(this.$axios)
       productService.createProduct(this.$auth.$storage.getLocalStorage('user_id'),payload).then(
         response => {

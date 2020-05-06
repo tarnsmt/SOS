@@ -93,6 +93,10 @@ export default {
   },
 
   components: { VmProductsList },
+   mounted(){
+    if(this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit('isUserLoggedIn',true)
+  },
 
   methods: {
     updateProduct() {
