@@ -12,7 +12,7 @@
 				</p>
 				<p class="control">
 					
-					<a class="button">
+					<a  v-if="!isUserLoggedIn" class="button">
 						<span class="icon">
 							<i class="fa fa-user-o"></i>
 						</span>
