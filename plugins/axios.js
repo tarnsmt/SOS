@@ -20,6 +20,6 @@ export default function ({ $axios, $auth, redirect }) {
                 redirect('/')
             }
         }
-        console.log("Other error")
+        console.log(error)
     })
 }

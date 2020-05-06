@@ -25,9 +25,9 @@ class ProductService {
         )
     }
 
-    checkout(quantity) {
+    checkout(product_id,quantity) {
         let payload = { quantity: quantity }
-        return this.client.post('products/' + id, payload).then(
+        return this.client.post('products/' + product_id, payload).then(
             response => {
                 return response.data
             }
@@ -50,7 +50,7 @@ class ProductService {
         )
     }
 
-    createProduct(createProductPayload) {
+    createProduct(user_id, createProductPayload) {
         return this.client.post('users/' + user_id + '/products', createProductPayload).then(
             response => {
                 return response.data
@@ -58,8 +58,8 @@ class ProductService {
         )
     }
 
-    updateProduct(updateProductPayload) {
-        return this.client.put('users/' + user_id + '/products', updateProductPayload).then(
+    updateProduct(user_id, product_id, updateProductPayload) {
+        return this.client.put('users/' + user_id + '/products/' + product_id, updateProductPayload).then(
             response => {
                 return response.data
             }

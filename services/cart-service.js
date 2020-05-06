@@ -48,12 +48,16 @@ class CartService {
             user_id: user_id,
             product_id: product_id
         }
-
-        return this.client.delete('delete_transaction', payload).then(
-            () => {
-                return this.getCart(user_id)
+        return this.client.delete('delete_transaction', {data:payload}).then(
+            response => {
+                console.log(response.data)
             }
         )
+    }
+
+    checkout(user_id){
+        let payload = {user_id: user_id}
+        return this.client.post('checkout', payload)
     }
 }
 

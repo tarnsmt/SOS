@@ -21,14 +21,17 @@ class AuthService {
                     auth.$storage.setLocalStorage('token', response.data.token)
                     auth.$storage.setLocalStorage('refresh_token', response.data.refresh_token)
                     cartService.setup(this.client)
-                    cartService.getCart(auth.$storage.getLocalStorage('user_id')).then(
-                        cart => {
-                            auth.$storage.setLocalStorage('cart',cart,true)
-                        }
-                    )
                     return "success"
                 }
             )
+        }
+
+        logout(auth) {
+            this.setToken(false)
+            auth.$stroage.setLocalStorage('token', null)
+            auth.$stroage.setLocalStorage('refresh_token', null)
+            auth.$storage.setLocalStorage('user_id', null)
+            auth.$storage.setLocalStorage('role', null)
         }
     }
 

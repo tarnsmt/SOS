@@ -9,7 +9,6 @@
       <section class="modal-card-body">
         <div v-if="!isCheckoutSection">
           <div class="box" v-for="product in products" :key="product.id">
-            <p>{{product}}</p>
             <button
               class="is-pulled-right button is-info is-inverted"
               @click="removeFromCart(product.id)"
@@ -43,6 +42,8 @@
 
 <script>
 import { cartService } from "@/services/cart-service";
+import {productService} from "@/services/product-service"
+
 export default {
   name: "checkout",
 
@@ -63,11 +64,12 @@ export default {
         cartService
           .getCart(this.$auth.$storage.getLocalStorage("user_id"))
           .then(response => {
+            if (response.message !== undefined) return [];
             let cartList = [];
             for (let product of response) {
               let data = {
                 id: product.product_id,
-                quantity: 5,
+                quantity: product.quantity,
                 status: true
               };
               this.$store.commit("addToCart", product.product_id);
@@ -87,11 +89,11 @@ export default {
     },
     buyLabel() {
       let totalProducts = this.products.length,
-        productsAdded = this.$store.getters.productsAdded,
-        pricesArray = [],
-        productLabel = "",
-        finalPrice = "",
-        quantity = 1;
+      productsAdded = this.$store.getters.productsAdded,
+      pricesArray = [],
+      productLabel = "",
+      finalPrice = "",
+      quantity = 1;
 
       productsAdded.forEach(product => {
         if (product.quantity >= 1) {
@@ -124,15 +126,28 @@ export default {
       }
     },
     removeFromCart(id) {
-      let data = {
-        id: id,
-        status: false
-      };
-      this.$store.commit("removeFromCart", id);
-      this.$store.commit("setAddedBtn", data);
+      cartService.setup(this.$axios);
+      cartService
+        .deleteProductFromCart(
+          this.$auth.$storage.getLocalStorage("user_id"),
+          id
+        )
+        .then(() => {
+          let data = {
+            id: id,
+            status: false
+          };
+          this.$store.commit("removeFromCart", id);
+          this.$store.commit("setAddedBtn", data);
+        });
     },
     onNextBtn() {
       if (this.isUserLoggedIn) {
+        productService.setup(this.$axios)
+        cartService.setup(this.$axios)
+        for (let product of this.$store.getters.productsAdded)
+          productService.checkout(product.id,product.quantity)
+        cartService.checkout(this.$auth.$storage.getLocalStorage("user_id"))
         this.isCheckoutSection = true;
       } else {
         this.$store.commit("showCheckoutModal", false);

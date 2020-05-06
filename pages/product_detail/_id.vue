@@ -3,7 +3,6 @@
     <div class="card is-clearfix columns">
       <figure class="card-image is-480x480 column is-one-thirds">
         <img src="https://bulma.io/images/placeholders/480x480.png" />
-        <nuxt-link to="/">user</nuxt-link>
       </figure>
       <div class="card-content column is-two-thirds">
         <div class="card-content__title">
@@ -139,12 +138,12 @@ export default {
   methods: {
     addToCart(id) {
       if (this.$store.getters.isUserLoggedIn) {
-        // cartService.setup(this.$axios);
-        // cartService.addCart(
-        //   this.$auth.$storage.getLocalStorage("user_id"), //user_id
-        //   id, //product_id
-        //   this.selected //quantity
-        // );
+        cartService.setup(this.$axios);
+        cartService.addCart(
+          this.$auth.$storage.getLocalStorage("user_id"), //user_id
+          id, //product_id
+          this.selected //quantity
+        );
         let data = {
           id: id,
           status: true

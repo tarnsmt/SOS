@@ -29,7 +29,10 @@ export default {
   },
 
   props: ['products'],
-
+  mounted(){
+    if(this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit('isUserLoggedIn',true)
+  },
   computed: {
     computedProducts() {
       if (this.$store.state.userInfo.hasSearched) {
