@@ -5,6 +5,7 @@
   "author": "60090036@kmitl.ac.th",
   "scripts": {
     "dev": "nuxt",
+    "start": "nuxt start",
     "production": "nuxt build",
     "now-build": "nuxt generate"
   },
