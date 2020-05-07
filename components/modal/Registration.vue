@@ -174,6 +174,10 @@ export default {
       }
     }
   },
+    mounted(){
+    if(this.$auth.$storage.getLocalStorage("user_id") !== null)
+      this.$store.commit('isUserLoggedIn',true)
+  },
 
   methods: {
     closeModal () {

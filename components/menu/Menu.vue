@@ -35,7 +35,7 @@
 					{{ wishlistLabel }}
 				</nuxt-link>
 				<hr class="navbar-divider">
-				<a class="navbar-item" @click="logout">
+				<a class="navbar-item" @click="logout" href="/" >
 					{{ logoutLabel }}
 				</a>
 			</div>
@@ -92,6 +92,7 @@ export default {
             this.$auth.$storage.setLocalStorage('user_id', null)
             this.$auth.$storage.setLocalStorage('role', null)
 			this.$auth.$storage.setLocalStorage('cart',null)
+			this.$router
 			window.location.reload(true)
 		},
 		showLoginModal () {
