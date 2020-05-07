@@ -68,7 +68,7 @@
     "rules": {}
   },
   "engines": {
-    "npm": "13.8.0"
+    "npm": "12.16.3"
   },
   "browserslist": [
     "> 1%",
