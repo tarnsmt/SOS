@@ -7,96 +7,119 @@
           <p v-if="isUserSignedUp" class="modal-card-title">{{ modalTitleRegistered }}</p>
           <button class="delete" aria-label="close" @click="closeModal"></button>
         </header>
-        <form @submit="checkForm" action="#" method="post">
+        <form >
           <section class="modal-card-body">
-            <div v-if="!isUserSignedUp">
+            <div>
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
-                    :class="[highlightNameWithError ? 'input is-danger' : 'input']"
+                  class="input"
                     type="text"
-                    :placeholder="namePlaceholder"
-                    v-model="name"
-                    @keyup="checkNameOnKeyUp(name)"
+                    placeholder="Firstname"
+                    v-model="firstname"
                   >
                   <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                   </span>
-                  <span v-if="highlightNameWithError !== null" class="icon is-small is-right">
-                    <i :class="[highlightNameWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
-                  </span>
                 </p>
-                <p v-if="highlightNameWithError" class="help is-danger">{{ nameErrorLabel }}</p>
               </div>
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
-                    :class="[highlightEmailWithError ? 'input is-danger' : 'input']"
-                    type="email"
-                    :placeholder="emailPlaceholder"
-                    name="emailName"
+                  class="input"
+                    type="text"
+                    placeholder="Lastname"
+                    v-model="lastname"
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                  class="input"
+                    type="text"
+                    placeholder="Username"
+                    v-model="username"
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                  class="input"
+                    type="text"
+                    placeholder="Email"
                     v-model="email"
-                    @keyup="checkEmailOnKeyUp(email)"
                   >
                   <span class="icon is-small is-left">
-                    <i class="fa fa-envelope"></i>
-                  </span>
-                  <span v-if="highlightEmailWithError !== null" class="icon is-small is-right">
-                    <i :class="[highlightEmailWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
+                    <i class="fa fa-user"></i>
                   </span>
                 </p>
-                <p v-if="highlightEmailWithError" class="help is-danger">{{ emailErrorLabel }}</p>
               </div>
               <div class="field">
                 <p class="control has-icons-left has-icons-right">
                   <input
-                    :class="[highlightPasswordWithError ? 'input is-danger' : 'input']"
+                  class="input"
+                    type="text"
+                    placeholder="Address"
+                    v-model="address"
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                  class="input"
+                    type="text"
+                    placeholder="Phone No."
+                    v-model="phone"
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                  class="input"
+                    type="text"
+                    placeholder="Role"
+                    v-model="role"
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </p>
+              </div>
+              <div class="field">
+                <p class="control has-icons-left has-icons-right">
+                  <input
+                  class="input"
                     type="password"
-                    :placeholder="passwordPlaceholder"
+                    placeholder="Password"
                     v-model="password"
-                    @keyup="checkPasswordOnKeyUp(password)"
                   >
                   <span class="icon is-small is-left">
-                    <i class="fa fa-lock"></i>
-                  </span>
-                  <span v-if="highlightPasswordWithError !== null" class="icon is-small is-right">
-                    <i :class="[highlightPasswordWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
+                    <i class="fa fa-user"></i>
                   </span>
                 </p>
-                <p v-if="highlightPasswordWithError" class="help is-danger">{{ passwordErrorLabel }}</p>
               </div>
-              <div class="field">
-                <p class="control has-icons-left has-icons-right">
-                  <input
-                    :class="[highlightRepeatPasswordWithError ? 'input is-danger' : 'input']"
-                    type="password"
-                    :placeholder="repeatPasswordPlaceholder"
-                    v-model="repeatPassword"
-                    @keyup="checkRepeatPasswordOnKeyUp(repeatPassword)"
-                  >
-                  <span class="icon is-small is-left">
-                    <i class="fa fa-lock"></i>
-                  </span>
-                  <span v-if="highlightRepeatPasswordWithError !== null" class="icon is-small is-right">
-                    <i :class="[highlightRepeatPasswordWithError ? 'fa fa-exclamation-circle' : 'fa fa-check']"></i>
-                  </span>
-                </p>
-                <p v-if="highlightRepeatPasswordWithError" class="help is-danger">{{ notEqualErrorLabel }}</p>
-              </div>
-            </div>
-            <div v-if="isUserSignedUp" class="level">
-              <div class="level-item has-text-centered">
-                <div>
-                  <p class="title">Welcome {{ name }}!</p>
-                  <p class="heading">You have registered</p>
-                </div>
-              </div>
-            </div>
+            </div>  
+            <br>
+            <a class="button is-success" @click="CreateUser">
+              <span>Signup</span>
+            </a>
           </section>
-          <footer class="modal-card-foot">
-            <button v-if="!isUserSignedUp" class="button is-success">{{ primaryBtnLabel }}</button>
-            <button v-if="isUserSignedUp" type="button" class="button is-info" @click="closeModal">{{ btnRegisteredLabel }}</button>
-          </footer>
         </form>
       </div>
     </div>
@@ -104,7 +127,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
-
+import axios from 'axios'
 export default {
   name: 'registration',
 
@@ -123,10 +146,14 @@ export default {
       nameErrorLabel: 'Name required',
       emailErrorLabel: 'Email required',
       emailNotValidLabel: 'Valid email required',
-      name: '',
-      email: '',
-      password: '',
-      repeatPassword: '',
+      username: null,
+      email: null,
+      password: null,
+      firstname: null,
+      lastname: null,
+      address: null,
+      phone: null,
+      role: null,
       highlightNameWithError: null,
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
@@ -152,87 +179,23 @@ export default {
     closeModal () {
       this.$store.commit('showSignupModal', false);
     },
-    checkForm (e) {
-      e.preventDefault();
-
-      if (this.name && this.email && this.password && this.repeatPassword) {
-        this.highlightEmailWithError = false;
-        this.highlightPasswordWithError = false;
-        this.isFormSuccess = true;
-        this.$store.commit('setUserName', this.name);
-        this.$store.commit('isUserSignedUp', this.isFormSuccess);
-        this.$store.commit('isUserLoggedIn', this.isFormSuccess);
-      }
-
-      if (!this.name) {
-        this.highlightNameWithError = true;
-      } else {
-        this.highlightNameWithError = false;
-      }
-
-      if (!this.email) {
-        this.highlightEmailWithError = true;
-
-        if (this.email && !isValidEmail(this.email)) {
-          this.emailErrorLabel = this.emailNotValidLabel;
-        }
-      } else {
-        this.highlightEmailWithError = false;
-      }
-
-      if (!this.password) {
-        this.highlightPasswordWithError = true;
-      } else {
-        this.highlightPasswordWithError = false;
-      }
-
-      if (!this.repeatPassword) {
-        this.highlightRepeatPasswordWithError = true;
-      } else {
-        this.highlightRepeatPasswordWithError = false;
-      }
-    },
-    checkNameOnKeyUp (nameValue) {
-      if (nameValue) {
-        this.highlightNameWithError = false;
-      } else {
-        this.highlightNameWithError = true;
-      }
-    },
-    checkEmailOnKeyUp (emailValue) {
-      if (emailValue && isValidEmail(emailValue)) {
-        this.highlightEmailWithError = false;
-      } else {
-        this.highlightEmailWithError = true;
-
-        if (!isValidEmail (emailValue)) {
-          this.emailErrorLabel = this.emailNotValidLabel;
-        }
-      }
-    },
-    checkPasswordOnKeyUp (passwordValue) {
-      if (passwordValue) {
-        this.highlightPasswordWithError = false;
-
-        if (this.repeatPassword === this.password) {
-          this.highlightRepeatPasswordWithError = false;
-        } else {
-          this.highlightRepeatPasswordWithError = true;
-        }
-      } else {
-        this.highlightPasswordWithError = true;
-      }
-    },
-    checkRepeatPasswordOnKeyUp (repeatPasswordValue) {
-      if (repeatPasswordValue) {
-        if (repeatPasswordValue === this.password) {
-          this.highlightRepeatPasswordWithError = false;
-        } else {
-          this.highlightRepeatPasswordWithError = true;
-        }
-      } else {
-        this.highlightRepeatPasswordWithError = true;
-      }
+    
+    CreateUser() {
+      let payload = {
+        "firstname":this.firstname,
+        "lastname":this.lastname, 
+        "username":this.username, 
+        "email":this.email,
+        "password": this.password,
+        "address":this.address,
+        "phone":this.phone,
+        "role":this.role,
+      };
+      let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.GbQN3gkbfEdLzMo44I4jv4tRwG4TyL4pae-jvFZnOJA'
+      return axios.post('https://sos-userapi.herokuapp.com/api/user/signup/',payload,{headers: {"Authorization": `Bearer ${token}`}}).then(
+      res => {
+        alert("User added successfully.")
+      })
     }
   }
 };

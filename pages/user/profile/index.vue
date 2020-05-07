@@ -1,6 +1,6 @@
 <template>
-  <div class="section" style="display:flex">
-    <div class="card is-centered" style="width:70%;border-radius:6px 6px 0px 0px;">
+  <div class="section" style="display:flex" >
+    <div class="card is-centered" style="width:70%;border-radius:6px 6px 0px 0px;" v-for=" user in info.user" :key="user">
     <form style="width:80%;margin-left:10%;padding-bottom:50px">
       <center>
         <h2 style="padding:30px 0px;">Edit Profile</h2>
@@ -12,7 +12,8 @@
         type="text"
         v-model="firstname"
         placeholder="First name"
-      >
+        Value="Name"
+      >  
       </p>
       <br>
       <label class="control">Last Name</label><br>
@@ -57,37 +58,50 @@
         >
         </p>
         <br>
-        <label class="control">User ID</label><br>
+        <label class="control">Phone No</label><br>
         <p class="control">
         <input
           class="input"
-          type="number"
-          v-model="userid"
+          type="text"
+          v-model="phone"
           min="1" step="any"
-          placeholder="User ID"
+          placeholder="Phone No"
         >
         </p>
         <br>
-        <a class="button btn">
+        
+        <label class="control">Password</label><br>
+        <p class="control">
+        <input
+          class="input"
+          type="password"
+          v-model="password"
+          min="1" step="any"
+          placeholder="Password"
+        >
+        </p>
+        <br>
+        <a class="button btn" @click="updateUserInfo">
           <span>Update Profile</span>
         </a>
     </form>
     </div>
-        <div class="card">
-      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="John" style="width:100%;border-radius:6px 6px 0px 0px;">
-      <p class="title">CEO /  Co-Founder</p>
-      <h3>Alec Thompson</h3>
-      <p class="card-description">
-        Don't be scared of the truth because we need to restart the human
-        foundation in truth And I love you like Kanye loves Kanye I love Rick
-        Owens’ bed design but the back is...
-      </p> 
-      <p><button style="border-radius:0px 0px 6px 6px;">Follow</button></p>
+      <div class="card" v-for=" user in info.user" :key="user">
+        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="John" style="width:100%;border-radius:6px 6px 0px 0px;">
+        <p class="title">{{ user.role }}</p>
+        <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+        <p style="align:center;">Username: {{user.username}}</p>
+        <p style="align:center;">Email: {{user.email}}</p>
+        <p style="align:center;">Address: {{user.address}}</p>
+        <p style="align:center;">Phone No: {{user.phone}}</p>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'user-profile',
   props: {
@@ -98,19 +112,51 @@ export default {
   },
   data() {
     return {
-      userid: null,
       username: null,
       disabled: null,
       emailadress: null,
       lastname: null,
       firstname: null,
       address: null,
-      city: null,
-      country: null,
-      code: null,
+      info: {},
+      phone: null,
+      password: null,
       aboutme:
         "Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
     };
+  },
+  methods: {
+    updateUserInfo(){
+      let payload = {
+        "firstname":this.firstname,
+        "lastname":this.lastname, 
+        "username":this.username, 
+        "role":this.$auth.$storage.getLocalStorage("role"),
+        "email":this.emailadress,
+        "phone":this.phone,
+        "address":this.address,
+        "password": this.password
+      };
+      let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.GbQN3gkbfEdLzMo44I4jv4tRwG4TyL4pae-jvFZnOJA'
+      return axios.patch('https://sos-userapi.herokuapp.com/api/user/updateUser/'+this.$auth.$storage.getLocalStorage("user_id"),payload,{headers: {"Authorization": `Bearer ${token}`}}).then(
+      res => {
+        alert("User account updated successfully.")
+      })
+    }
+  },
+  created () {
+    let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.GbQN3gkbfEdLzMo44I4jv4tRwG4TyL4pae-jvFZnOJA'
+    //this.config = {
+     // headers: {
+      //  Authorization: "Bearer " + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJ1c2VyX2lkIjoxfQ.GbQN3gkbfEdLzMo44I4jv4tRwG4TyL4pae-jvFZnOJA'
+     // }
+    //}
+    console.log(this.$auth.$storage.getLocalStorage("user_id"))
+    axios.get('https://sos-userapi.herokuapp.com/api/user/getUser/'+this.$auth.$storage.getLocalStorage("user_id"),{headers: {"Authorization": `Bearer ${token}`}}).then(
+      res => {
+        this.info = res.data;
+      }
+    )
   }
 };
 </script>
