@@ -85,10 +85,10 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/font-awesome',
+    // '@nuxtjs/font-awesome',
     '@nuxtjs/auth',
     '@nuxtjs/axios',
-  
+
   ],
   /*
   ** Axios module configuration
@@ -98,12 +98,18 @@ module.exports = {
     baseURL: process.env.AUTH_URL,
     // proxy: true
   },
- 
+
   buildModules: [
     '@nuxtjs/dotenv'
   ],
   dotenv: {
     /* module options */
   },
-  auth: {}
+  auth: {},
+  build: {
+    filenames: {
+      img: 'img/[name]-[contenthash:7].[ext]',
+      font: 'fonts/[name]-[contenthash:7].[ext]'
+    }
+  },
 }
