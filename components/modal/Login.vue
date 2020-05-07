@@ -69,6 +69,7 @@
 
 <script>
 import { isValidEmail } from '@/assets/validators';
+import { authService } from '@/services/auth-service';
 
 export default {
   name: 'login',
@@ -83,8 +84,8 @@ export default {
       emailNotValidLabel: 'Valid email required',
       btnLoggedInLabel: 'Close',
       emailPlaceholder: 'Your email',
-      email: '',
-      password: '',
+      email: 'supernut@gmail.com',
+      password: 'supernut_password',
       highlightEmailWithError: null,
       highlightPasswordWithError: null,
       isFormSuccess: false
@@ -115,7 +116,12 @@ export default {
         this.highlightEmailWithError = false;
         this.highlightPasswordWithError = false;
         this.isFormSuccess = true;
-        this.$store.commit('isUserLoggedIn', this.isFormSuccess);
+        authService.setup(this.$axios)
+        authService.login(this.$auth,{email: this.email, password: this.password}).then(
+          response => {
+            this.$store.commit('isUserLoggedIn',true)   
+          }
+        )
       }
 
       if (!this.email) {
