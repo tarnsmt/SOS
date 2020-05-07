@@ -112,4 +112,10 @@ module.exports = {
       font: 'fonts/[name]-[contenthash:7].[ext]'
     }
   },
+  env: {
+    DEFAULT_URL : "http://localhost:3000/api/v1/",
+    PRODUCT_URL :" https://sos-products.herokuapp.com/api/v1/",
+    AUTH_URL : "https://sos-auth.herokuapp.com/api/v1/",
+    CART_URL : "https://sos-shoppingcart.herokuapp.com/api/v1/"
+  }
 }
