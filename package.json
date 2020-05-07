@@ -67,6 +67,9 @@
     "extends": "plugin:vue/essential",
     "rules": {}
   },
+  "engines": {
+    "npm": "13.x"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
