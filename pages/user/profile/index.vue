@@ -157,7 +157,13 @@ export default {
           "https://sos-userapi.herokuapp.com/api/user/updateUser/" +
             this.$auth.$storage.getLocalStorage("user_id"),
           payload,
-          { headers: { Authorization: `Bearer ${this.token}` } }
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+              "Content-Type": "application/json",
+              Accept: "applciation/json"
+            }
+          }
         )
         .then(res => {
           alert("User account updated successfully.");
@@ -181,14 +187,14 @@ export default {
       )
       .then(res => {
         this.info = res.data;
-        this.username = res.data.user[0].username
-        this.firstname =  res.data.user[0].firstname,
-        this.lastname = res.data.user[0].lastname,
-        this.email = res.data.user[0].email,
-        this.phone =  res.data.user[0].phone,
-        this.address = res.data.user[0].address,
-        this.email = res.data.user[0].email,
-        this.password = res.data.user[0].password
+        this.username = res.data.user[0].username;
+        (this.firstname = res.data.user[0].firstname),
+          (this.lastname = res.data.user[0].lastname),
+          (this.email = res.data.user[0].email),
+          (this.phone = res.data.user[0].phone),
+          (this.address = res.data.user[0].address),
+          (this.email = res.data.user[0].email),
+          (this.password = res.data.user[0].password);
       });
   }
 };
